@@ -2,6 +2,7 @@ import React from 'react';
 import { STRENGTHS } from '../../constants';
 import { ScrollReveal } from '../UI/ScrollReveal';
 import { CheckCircle2 } from 'lucide-react';
+import { CostChart } from '../UI/CostChart';
 
 export const Strengths: React.FC = () => {
   return (
@@ -10,7 +11,8 @@ export const Strengths: React.FC = () => {
         <div className="mb-24 text-center">
             <ScrollReveal>
               <h2 className="text-3xl md:text-4xl font-bold text-brand-primary mb-4">Why Choose Us</h2>
-              <div className="w-20 h-1 bg-brand-secondary mx-auto rounded-full"></div>
+              <p className="text-slate-500">選ばれる理由</p>
+              <div className="w-12 h-1 bg-brand-secondary mx-auto rounded-full mt-4"></div>
             </ScrollReveal>
         </div>
 
@@ -18,19 +20,25 @@ export const Strengths: React.FC = () => {
           {STRENGTHS.map((strength, index) => (
             <div key={index} className={`flex flex-col ${strength.reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24`}>
               
-              {/* Image Side */}
+              {/* Image/Visual Side */}
               <div className="w-full lg:w-1/2 relative">
                 <ScrollReveal animation={strength.reverse ? 'slide-right' : 'slide-left'}>
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={strength.image} 
-                      alt={strength.title} 
-                      className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-brand-primary/10 mix-blend-multiply"></div>
-                  </div>
-                  {/* Decor */}
-                  <div className={`absolute -bottom-6 ${strength.reverse ? '-left-6' : '-right-6'} w-24 h-24 bg-brand-secondary/10 rounded-full blur-2xl -z-10`}></div>
+                  {/* index 0 (本質的なコスト削減) の時だけグラフを表示 */}
+                  {index === 0 ? (
+                    <div className="bg-slate-50 p-8 rounded-3xl relative overflow-hidden border border-slate-100">
+                       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-secondary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                       <CostChart />
+                    </div>
+                  ) : (
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+                      <img 
+                        src={strength.image} 
+                        alt={strength.title} 
+                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-brand-primary/10 mix-blend-multiply"></div>
+                    </div>
+                  )}
                 </ScrollReveal>
               </div>
 
@@ -51,12 +59,14 @@ export const Strengths: React.FC = () => {
                   </p>
 
                   <ul className="space-y-3">
-                    {[1, 2, 3].map((i) => (
-                        <li key={i} className="flex items-center gap-3 text-slate-700 font-medium">
-                            <CheckCircle2 size={20} className="text-brand-secondary flex-shrink-0" />
-                            <span>プロフェッショナルによる徹底した分析</span>
-                        </li>
-                    ))}
+                    <li className="flex items-center gap-3 text-slate-700 font-medium">
+                        <CheckCircle2 size={20} className="text-brand-secondary flex-shrink-0" />
+                        <span>プロフェッショナルによる徹底分析</span>
+                    </li>
+                    <li className="flex items-center gap-3 text-slate-700 font-medium">
+                        <CheckCircle2 size={20} className="text-brand-secondary flex-shrink-0" />
+                        <span>無駄を省いた最短ルートの提案</span>
+                    </li>
                   </ul>
                 </ScrollReveal>
               </div>
