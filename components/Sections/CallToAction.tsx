@@ -1,60 +1,83 @@
 import React from 'react';
 import { COMPANY_INFO } from '../../constants';
 import { ScrollReveal } from '../UI/ScrollReveal';
-import { Phone, Mail, ArrowRight, Clock } from 'lucide-react';
+import { Phone, Mail, Clock, ArrowRight } from 'lucide-react';
 
 export const CallToAction: React.FC = () => {
   return (
-    <section id="cta" className="py-32 bg-brand-primary relative overflow-hidden">
-      {/* Background Effect */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-transparent to-black/80"></div>
+    <section id="cta" className="relative py-32 overflow-hidden bg-brand-primary">
+       {/* Background */}
+       <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000" 
+            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary via-brand-primary/95 to-slate-900/90"></div>
+       </div>
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
-        <ScrollReveal>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Ready to Optimize?
-          </h2>
-          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            まずは現状の診断から。<br />
-            コスト削減のプロフェッショナルが、最適なプランをご提案します。
-          </p>
-        </ScrollReveal>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          
+          {/* Text Area */}
+          <div className="w-full lg:w-1/2">
+            <ScrollReveal>
+              <div className="inline-block px-4 py-1 bg-brand-secondary/20 border border-brand-secondary/50 rounded-full mb-8">
+                <span className="text-brand-secondary text-xs font-bold tracking-widest uppercase">Contact Us</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+                未来への投資を、<br/>
+                <span className="text-brand-secondary">今、始める。</span>
+              </h2>
+              <p className="text-lg text-slate-300 leading-relaxed mb-10">
+                現状のコスト診断は無料です。<br/>
+                無駄なコストを利益に変える、最初のステップを踏み出しましょう。<br/>
+                専任のコンサルタントが、あなたのビジネスを加速させます。
+              </p>
+              
+              <div className="flex items-center gap-4 text-slate-400 text-sm font-medium">
+                 <Clock size={18} className="text-brand-secondary" />
+                 <span>土日祝も対応可能 / 24時間受付中</span>
+              </div>
+            </ScrollReveal>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-           {/* Phone Card (泥臭く、信頼できるデザインへ) */}
-           <ScrollReveal delay={100} className="h-full">
-             <div className="bg-gradient-to-br from-white to-slate-50 border border-white/10 p-8 rounded-2xl hover:shadow-2xl hover:shadow-brand-secondary/20 transition-all duration-300 h-full flex flex-col items-center justify-center group cursor-pointer relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-brand-secondary"></div>
-                
-                <div className="flex items-center gap-2 mb-2 bg-brand-secondary/10 px-3 py-1 rounded-full">
-                   <Clock size={14} className="text-brand-secondary" />
-                   <span className="text-brand-secondary text-xs font-bold">お急ぎの方へ</span>
+          {/* Cards Area */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+            {/* Phone Card */}
+            <ScrollReveal delay={100}>
+              <a href={`tel:${COMPANY_INFO.phone}`} className="block group bg-white p-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-brand-secondary/20 border border-transparent hover:border-brand-secondary">
+                <div className="flex justify-between items-start mb-4">
+                   <div className="bg-brand-secondary/10 p-3 rounded-xl text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-colors">
+                      <Phone size={28} />
+                   </div>
+                   <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">代表直通・お急ぎの方</span>
                 </div>
-                
-                <p className="text-slate-500 text-sm font-bold mb-1">代表 澤井直通</p>
-                <a href={`tel:${COMPANY_INFO.phone}`} className="text-3xl md:text-4xl font-bold text-slate-800 tracking-wide group-hover:text-brand-secondary transition-colors font-english mb-2">
-                  {COMPANY_INFO.phone}
-                </a>
-                <p className="text-slate-400 text-xs">土日祝も対応可能です</p>
-             </div>
-           </ScrollReveal>
+                <div className="text-slate-500 text-sm font-bold tracking-widest uppercase mb-1">Call Us Now</div>
+                <div className="text-4xl font-black text-brand-primary group-hover:text-brand-secondary transition-colors font-english tracking-tight">
+                   {COMPANY_INFO.phone}
+                </div>
+              </a>
+            </ScrollReveal>
 
-           {/* Email Card */}
-           <ScrollReveal delay={200} className="h-full">
-             <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl h-full flex flex-col items-center justify-center group cursor-pointer hover:bg-white/10 transition-colors">
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white mb-4">
-                  <Mail size={24} />
+            {/* Email Card */}
+            <ScrollReveal delay={200}>
+              <a href={`mailto:${COMPANY_INFO.email}`} className="block group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl transition-all duration-300 hover:bg-white/10">
+                <div className="flex justify-between items-center">
+                   <div className="flex items-center gap-4">
+                      <div className="bg-white/10 p-3 rounded-xl text-white">
+                         <Mail size={24} />
+                      </div>
+                      <div>
+                         <div className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Email Support</div>
+                         <div className="text-xl font-bold text-white break-all">{COMPANY_INFO.email}</div>
+                      </div>
+                   </div>
+                   <ArrowRight className="text-white opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all" />
                 </div>
-                <p className="text-slate-400 text-sm mb-2 font-bold tracking-widest uppercase">Email</p>
-                <a href={`mailto:${COMPANY_INFO.email}`} className="text-xl font-bold text-white break-all hover:text-brand-secondary transition-colors">
-                  {COMPANY_INFO.email}
-                </a>
-                <div className="mt-4 flex items-center text-slate-300 font-bold text-sm group-hover:text-white transition-colors">
-                   お問い合わせフォーム <ArrowRight size={16} className="ml-1" />
-                </div>
-             </div>
-           </ScrollReveal>
+              </a>
+            </ScrollReveal>
+          </div>
+
         </div>
       </div>
     </section>
