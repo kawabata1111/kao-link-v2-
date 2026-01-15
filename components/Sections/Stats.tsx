@@ -1,22 +1,27 @@
 import React from 'react';
 import { STATS } from '../../constants';
+import { ScrollReveal } from '../UI/ScrollReveal';
 
 export const Stats: React.FC = () => {
   return (
-    <section id="stats" className="py-24 bg-black text-white border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-800 border-t border-b border-gray-800">
-          {STATS.map((stat, index) => (
-            <div key={index} className="py-12 md:px-12 flex flex-col items-start justify-center pl-0">
-              <span className="text-7xl lg:text-8xl font-black tracking-tighter text-white block mb-2 leading-none">
-                {stat.number}{stat.suffix}
-              </span>
-              <span className="text-sm font-bold text-gray-500 tracking-widest uppercase mt-4">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
+    <section id="stats" className="relative -mt-20 z-20 px-6 lg:px-12 pointer-events-none">
+      <div className="max-w-7xl mx-auto">
+        <ScrollReveal animation="fade-up">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100 pointer-events-auto">
+            {STATS.map((stat, index) => (
+              <div key={index} className="p-8 md:p-10 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-gray-100 last:border-r-0 hover:bg-gray-50 transition-colors duration-300">
+                <div className="mb-4 p-3 bg-brand-secondary/10 rounded-full text-brand-secondary">
+                  <stat.icon size={28} />
+                </div>
+                <div className="text-4xl lg:text-5xl font-bold text-brand-primary mb-2 font-english tracking-tighter">
+                  {stat.number}
+                  <span className="text-2xl text-brand-secondary ml-1">{stat.suffix}</span>
+                </div>
+                <p className="text-sm font-bold text-slate-500 tracking-widest uppercase">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

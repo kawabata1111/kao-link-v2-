@@ -2,7 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base Styles */
-body {
-  @apply text-gray-900 bg-white;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-slate-800 bg-white antialiased;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+}
+
+/* Custom Animation Classes */
+.fade-up-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-up-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zoom-out {
+  animation: zoomOut 20s infinite alternate;
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }
