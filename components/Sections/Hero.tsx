@@ -1,76 +1,77 @@
-import React, { useEffect, useRef } from 'react';
-import { ArrowRight, ChevronDown, Phone, Mail, Zap, TrendingUp, ShieldCheck } from 'lucide-react';
-import { COMPANY_INFO } from '../../constants';
+import React from 'react';
+import { NEWS_ITEMS } from '../../constants';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ScrollReveal } from '../UI/ScrollReveal';
 
 export const Hero: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const scrolled = window.scrollY;
-        heroRef.current.style.transform = `translateY(${scrolled * 0.5}px)`;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <section id="home" className="relative h-screen min-h-[800px] w-full overflow-hidden flex items-center bg-slate-900">
-      {/* Background Parallax */}
-      <div ref={heroRef} className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-          alt="Modern Architecture"
-          className="w-full h-full object-cover opacity-40 mix-blend-luminosity scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900/90 to-brand-primary/80"></div>
-      </div>
+    <>
+      <section id="home" className="relative h-[85vh] min-h-[600px] w-full flex items-center section-diagonal bg-slate-900">
+        {/* Parallax Background Image (技術点: background-attachment: fixed) */}
+        <div 
+          className="absolute inset-0 bg-fixed-parallax opacity-40"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000')" }}
+        ></div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
 
-      {/* Dynamic Shapes (LLCOM-like dynamic background) */}
-      <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-brand-secondary/20 to-transparent transform skew-x-12 translate-x-1/3 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/2 h-2/3 bg-brand-primary/40 transform -skew-x-12 -translate-x-1/4 blur-3xl"></div>
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 w-full pt-20">
-        <div className="border-l-4 border-brand-secondary pl-8 md:pl-12 py-2">
-          <div className="flex items-center gap-3 mb-6 animate-fade-in opacity-0" style={{ animationDelay: '0.2s' }}>
-             <span className="h-[1px] w-12 bg-brand-secondary"></span>
-             <span className="text-brand-secondary font-bold tracking-[0.3em] text-sm uppercase">Professional Agency</span>
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 w-full text-white">
+          <div className="max-w-3xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <div className="inline-block px-3 py-1 bg-brand-secondary text-white text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+              Corporate Agency
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] mb-8 text-shadow-lg">
+              そのコストに、<br />
+              <span className="text-brand-secondary">最適解</span>を。
+            </h1>
+            
+            <p className="text-lg md:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl font-medium border-l-4 border-white/30 pl-6">
+              電気・ガス・通信のコスト削減で、<br />
+              企業の利益構造を改革する戦略的パートナー。
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#business"
+                className="px-10 py-4 bg-white text-slate-900 font-bold rounded shadow-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 group"
+              >
+                事業内容を見る <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="#company"
+                className="px-10 py-4 border border-white text-white font-bold rounded hover:bg-white/10 transition-all flex items-center justify-center"
+              >
+                会社概要
+              </a>
+            </div>
           </div>
-
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-10 animate-fade-in-up opacity-0" style={{ animationDelay: '0.4s' }}>
-            COST<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">REDUCTION.</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-slate-300 max-w-2xl leading-relaxed font-light animate-fade-in-up opacity-0" style={{ animationDelay: '0.6s' }}>
-            企業の利益構造を、<br />
-            <span className="text-white font-bold border-b border-brand-secondary">根底から再構築</span>する。
-          </p>
         </div>
+      </section>
 
-        <div className="mt-16 flex flex-col sm:flex-row gap-6 pl-0 md:pl-12 animate-fade-in-up opacity-0" style={{ animationDelay: '0.8s' }}>
-          <a href="#business" className="group relative px-10 py-5 bg-white text-brand-primary font-bold text-lg overflow-hidden transition-all hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)]">
-            <div className="absolute inset-0 w-full h-full bg-brand-secondary transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
-            <span className="relative group-hover:text-white flex items-center gap-2 transition-colors">
-              Our Service <ArrowRight size={20} />
-            </span>
-          </a>
-          <a href="#cta" className="px-10 py-5 border border-white/30 text-white font-bold text-lg hover:bg-white/10 transition-colors backdrop-blur-sm">
-            Contact Us
-          </a>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-0 right-0 p-12 hidden md:block animate-pulse">
-         <div className="flex items-center gap-4 -rotate-90 origin-right translate-x-8">
-            <span className="text-white/50 text-xs tracking-[0.3em] uppercase">Scroll Down</span>
-            <div className="w-16 h-[1px] bg-white/30"></div>
+      {/* News Ticker (技術点: Hero直下のニュース配置) */}
+      <div className="bg-slate-50 border-b border-gray-200">
+         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-2 text-brand-secondary font-bold text-sm uppercase tracking-wider">
+               <span className="w-2 h-2 bg-brand-secondary rounded-full animate-pulse"></span>
+               Latest News
+            </div>
+            <div className="flex-grow overflow-hidden">
+               {/* 簡易的な1件表示。本来はスライダーにするが、まずは最新1件を確実に表示 */}
+               <div className="flex flex-col md:flex-row gap-2 md:gap-6 text-sm">
+                  <span className="text-slate-500 font-english font-medium">{NEWS_ITEMS[0].date}</span>
+                  <a href="#" className="font-bold text-slate-700 hover:text-brand-primary hover:underline truncate">
+                     {NEWS_ITEMS[0].title}
+                  </a>
+               </div>
+            </div>
+            <a href="#" className="hidden md:flex items-center text-xs font-bold text-slate-500 hover:text-brand-secondary transition-colors">
+               記事一覧 <ChevronRight size={14} />
+            </a>
          </div>
       </div>
-    </section>
+    </>
   );
 };

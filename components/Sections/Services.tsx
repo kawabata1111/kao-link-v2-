@@ -1,59 +1,57 @@
 import React from 'react';
 import { SERVICES } from '../../constants';
 import { ScrollReveal } from '../UI/ScrollReveal';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const Services: React.FC = () => {
   return (
-    <section id="business" className="py-32 bg-slate-50 relative overflow-hidden">
-      {/* Background Text */}
-      <div className="absolute top-20 right-[-10%] text-[20rem] font-black text-slate-200/50 leading-none pointer-events-none select-none z-0">
-        WORK
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <ScrollReveal>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-slate-200 pb-8">
-            <div>
-              <span className="text-brand-secondary font-bold tracking-widest text-sm uppercase block mb-4">Core Competence</span>
-              <h2 className="text-4xl md:text-5xl font-black text-brand-primary leading-tight">
-                事業内容
-              </h2>
-            </div>
-            <p className="text-slate-500 max-w-md mt-6 md:mt-0 text-right leading-relaxed font-medium">
-              独自のデータベースと交渉力で、<br />
-              企業の固定費削減をワンストップで実現します。
-            </p>
+    <section id="business" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-100 pb-8">
+          <ScrollReveal>
+             <span className="text-brand-secondary font-bold tracking-widest text-xs uppercase block mb-2">Our Business</span>
+             <h2 className="text-4xl font-bold text-slate-800">事業内容</h2>
+          </ScrollReveal>
+          <div className="mt-4 md:mt-0 text-right">
+             <a href="#" className="text-brand-secondary font-bold text-sm flex items-center gap-1 hover:underline justify-end">
+                全サービス一覧 <ArrowRight size={16} />
+             </a>
           </div>
-        </ScrollReveal>
+        </div>
 
+        {/* Card Grid (技術点: 画像比率とホバーエフェクト) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {SERVICES.map((service, index) => (
-            <ScrollReveal key={service.id} delay={index * 100} className="group">
-              <div className="bg-white h-full p-8 md:p-10 border-t-4 border-transparent hover:border-brand-secondary shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
-                {/* Number */}
-                <div className="absolute top-4 right-6 text-6xl font-black text-slate-100 group-hover:text-brand-secondary/10 transition-colors">
-                  0{index + 1}
-                </div>
-                
-                <div className="mb-8 relative z-10">
-                   <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500 mb-6">
-                      <service.icon size={32} />
+            <ScrollReveal key={service.id} delay={index * 100}>
+              <div className="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
+                {/* Image Area (アスペクト比 16:9) */}
+                <div className="relative aspect-video overflow-hidden bg-gray-100">
+                   <img 
+                     src={service.image} 
+                     alt={service.title} 
+                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                   />
+                   <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
+                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur p-2 rounded text-brand-primary">
+                      <service.icon size={20} />
                    </div>
-                   <h3 className="text-2xl font-bold text-brand-primary mb-2">{service.title}</h3>
-                   <p className="text-xs font-bold text-brand-secondary tracking-widest uppercase">{service.subtitle}</p>
-                </div>
-
-                <p className="text-slate-600 leading-relaxed mb-8 relative z-10 min-h-[5rem]">
-                  {service.description}
-                </p>
-
-                <div className="flex items-center text-sm font-bold text-slate-400 group-hover:text-brand-primary transition-colors">
-                  VIEW MORE <ArrowUpRight size={18} className="ml-2" />
                 </div>
                 
-                {/* Hover Gradient */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-brand-secondary to-brand-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                {/* Text Area */}
+                <div className="p-6 flex flex-col flex-grow">
+                   <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-brand-secondary transition-colors">
+                      {service.title}
+                   </h3>
+                   <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                      {service.description}
+                   </p>
+                   <div className="border-t border-gray-100 pt-4 mt-auto">
+                      <span className="text-xs font-bold text-slate-400 group-hover:text-brand-primary transition-colors flex items-center gap-2">
+                         MORE DETAILS <div className="w-8 h-[1px] bg-slate-300 group-hover:bg-brand-primary transition-colors"></div>
+                      </span>
+                   </div>
+                </div>
               </div>
             </ScrollReveal>
           ))}
